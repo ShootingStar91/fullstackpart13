@@ -1,0 +1,10 @@
+services:
+  psqlserver:
+    container_name: psql_server
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: salasana
+    ports:
+      - 5432:5432
+
