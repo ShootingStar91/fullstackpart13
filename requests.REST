@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/blogs
+content-type: application/json
+
+{
+  "author": "Thomas Shelby",
+    "url": "shelby.fi",
+    "title": "damn it feels good to be a gangsta"
+}
