@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW15c2hlbGJ5IiwiaWQiOjEsImlhdCI6MTY3MDM2MzYwNX0.kq34QvsJU_bfeJ2b96_ItJdHRVGFHkr_L2kK7-qK660
+
+{
+  "title": "gangster blog",
+  "author": "thomas shelby",
+  "url": "https://peakyblinders.fi"
+}

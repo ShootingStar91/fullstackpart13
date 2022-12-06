@@ -1,8 +1,9 @@
-const { User } = require('../models')
+const { User, Blog } = require('../models')
 const router = require('express').Router()
 
 router.get('/api/users', async (req, res) => {
-    const users = await User.findAll()
+    const users = await User.findAll({ include: { model: Blog } })
+
     res.json(users)
 })
 
@@ -13,6 +14,7 @@ router.post('/api/users', async (req, res) => {
     })
     res.json(newUser)
 })
+
 
 router.put('/api/users/:username', async (req, res) => {
     const user = await User.findOne({ username: req.params.username });
