@@ -3,12 +3,17 @@ const { Blog, User } = require('../models')
 const { blogFinder, userExtractor } = require('../util/middleware')
 
 router.get('/api/blogs', blogFinder, async (req, res) => {
-    const blogs = await Blog.findAll()
+    const blogs = await Blog.findAll({
+        attributes: { exclude: ['userId']},
+        include: {
+            model: User,
+            attributes: ['name']
+        }
+    })
     res.json(blogs)
 })
 
-router.delete('/api/blogs/:id', [blogFinder, userExtractor], async (req, res) => {
-    
+router.delete('/api/blogs/:id', [blogFinder, userExtractor], async (req, res) => {    
     if (req.user.id === req.blog.userId) {
         await req.blog.destroy()
     } else {
