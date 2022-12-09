@@ -4,15 +4,22 @@ const { blogFinder, userExtractor } = require('../util/middleware')
 const { Op } = require('sequelize');
 
 router.get('/api/blogs', blogFinder, async (req, res) => {
-    const where = {}
+    let where = {}
     if (req.query.search) {
-        where.title = {
-            [Op.substring]: req.query.search
+        where = {
+            [Op.or]: {
+                title: {
+                    [Op.substring]: req.query.search
+                },
+                author: {
+                    [Op.substring]: req.query.search
+                }
+            }
         }
     }
-    
+
     const blogs = await Blog.findAll({
-        attributes: { exclude: ['userId']},
+        attributes: { exclude: ['userId'] },
         include: {
             model: User,
             attributes: ['name']
@@ -22,7 +29,7 @@ router.get('/api/blogs', blogFinder, async (req, res) => {
     res.json(blogs)
 })
 
-router.delete('/api/blogs/:id', [blogFinder, userExtractor], async (req, res) => {    
+router.delete('/api/blogs/:id', [blogFinder, userExtractor], async (req, res) => {
     if (req.user.id === req.blog.userId) {
         await req.blog.destroy()
     } else {
