@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFydGh1ckBzaGVsYnkuZmkiLCJpZCI6MiwiaWF0IjoxNjcwNjc0NjY0fQ.G470PF1xwUeqdUburaTvXUEdQZSkFUNZVOvPkgVKAh8
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFydGh1ckBzaGVsYnkuZmkiLCJpZCI6MSwiaWF0IjoxNjcwNjc5NDE1fQ.R6O6PsCFu460_AdNIz4nOHqKThk2-h9nLNqhjoV6Ogs
 
 {
   "title": "Gangster sidekick",
