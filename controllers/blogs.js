@@ -13,7 +13,8 @@ router.get('/api/blogs', blogFinder, async (req, res) => {
                 },
                 author: {
                     [Op.substring]: req.query.search
-                }
+                },
+            
             }
         }
     }
@@ -24,7 +25,10 @@ router.get('/api/blogs', blogFinder, async (req, res) => {
             model: User,
             attributes: ['name']
         },
-        where
+        where,
+        order: [
+            ['likes', 'DESC']
+        ]
     })
     res.json(blogs)
 })

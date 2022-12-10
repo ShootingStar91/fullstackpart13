@@ -2,6 +2,6 @@ POST http://localhost:3001/api/users
 content-type: application/json
 
 {
-  "username": "tommyshelby3",
-  "name": "Tommy Shelby"
+  "username": "arthur@shelby.fi",
+  "name": "Arthur Shelby"
 }
