@@ -3,7 +3,7 @@ Content-Type: application/json
 authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFydGh1ckBzaGVsYnkuZmkiLCJpZCI6MSwiaWF0IjoxNjcwNjc5NDE1fQ.R6O6PsCFu460_AdNIz4nOHqKThk2-h9nLNqhjoV6Ogs
 
 {
-  "title": "Gangster sidekick",
-  "author": "Arthur Shelby",
+  "title": "Gangster sidekick 3",
+  "author": "Tommy Shelby",
   "url": "https://peakyblinders.fi"
 }
