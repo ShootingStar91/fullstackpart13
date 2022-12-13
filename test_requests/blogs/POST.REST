@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFydGh1ckBzaGVsYnkuZmkiLCJpZCI6MSwiaWF0IjoxNjcwNzk2ODUzfQ.pOM8gEvKJXI2tGxxsveKPfxTADPX5KET4NhrdMuCtWI
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFydGh1ckBzaGVsYnkuZmkiLCJpZCI6MSwiaWF0IjoxNjcwOTM1MTc4fQ.pQBh4hNEACaFMsR0MLhkQlffyn5q3ncpMXrynEbVunE
 
 {
   "title": "Gangster sidekick 1",
   "author": "Tommy Shelby",
   "url": "https://peakyblinders.fi",
-  "year": "1990"
+  "year": "1992"
 }
