@@ -7,6 +7,12 @@ router.get("/api/users", async (req, res) => {
 });
 
 router.get("/api/users/:id", async (req, res) => {
+  const read = req.query.read;
+  const where = {};
+  if (read !== undefined) {
+    where.read = read;
+  }
+  console.log({ read }, { where });
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: ["createdAt", "updatedAt"] },
     include: {
@@ -14,7 +20,8 @@ router.get("/api/users/:id", async (req, res) => {
       as: "readings",
       attributes: { exclude: ["userId", "createdAt", "updatedAt"] },
       through: {
-        attributes: ['id', 'read'],
+        attributes: ["id", "read"],
+        where
       },
     },
   });
