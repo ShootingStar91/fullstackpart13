@@ -1,40 +1,53 @@
-const { Blog, User } = require('../models')
-const jwt = require('jsonwebtoken')
-const { SECRET } = require('./config')
+const { Blog, User, Session } = require("../models");
+const jwt = require("jsonwebtoken");
+const { SECRET } = require("./config");
 
-const tokenExtractor = (req, res) => {
-    const authorization = req.get('authorization')
+const tokenExtractor = async (req, res) => {
+  const authorization = req.get("authorization");
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    const token = authorization.substring(7);
+    console.log({ token });
     
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-        try {
-            console.log(authorization.substring(7))
-            req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
-        } catch (error) {
-            console.log(error)
-            return res.status(401).json({ error: 'Invalid token' })
-        }
-    } else {
-        return res.status(401).json({ error: 'Token missing' })
+    const found = await Session.findOne({
+      where: { token },
+    });
+    if (!found) {
+      throw new Error("Token missing or invalid");
     }
-    
-}
+    req.decodedToken = jwt.verify(token, SECRET);
+    req.token = token;
+    if (req.decodedToken.id && token) {
+      return;
+    }
+    throw new Error("Invalid token!")
+  } else {
+    throw new Error("Missing token")
+  }
+};
 
 const userExtractor = async (req, res, next) => {
-    console.log("user extractor")
-    tokenExtractor(req, res)
-    req.user = await User.findByPk(req.decodedToken.id)
-    console.log({user: req.user})
-    next()
-}
+  await tokenExtractor(req, res);
+  console.log(
+    "req decoded token in userextractor after tokenextractor:",
+    req.decodedToken
+  );
+  req.user = await User.findByPk(req.decodedToken.id);
+  console.log({ user: req.user });
+  if (req.user.disabled) {
+    throw new Error("Your user has been disabled.")
+  }
+  next();
+};
 
 const blogFinder = async (req, res, next) => {
-    req.blog = await Blog.findByPk(req.params.id);
-    console.log({blog: req.blog})
-    next();
-}
+  req.blog = await Blog.findByPk(req.params.id);
+  console.log({ blog: req.blog });
+  next();
+};
 
 const errorHandler = async (err, req, res, next) => {
-    res.status(400).send({ message: err.message })
-}
+  res.status(400).send({ message: err.message });
+};
 
-module.exports = { blogFinder, errorHandler, userExtractor }
+module.exports = { blogFinder, errorHandler, userExtractor };

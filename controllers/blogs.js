@@ -44,6 +44,7 @@ router.delete(
 );
 
 router.post("/api/blogs", [blogFinder, userExtractor], async (req, res) => {
+  console.log("post api blogs")
   try {
     const newBlog = await Blog.create({
       title: req.body.title,
